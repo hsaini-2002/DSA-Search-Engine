@@ -90,16 +90,14 @@ app.get("/search",(req,res)=>{
   for(let i=0;i<40;i++){
     qs[i]=fs.readFileSync(`./Data/problem${dotprod[i][1]+1}.txt`).toString();
   }
-setTimeout(()=>{
      //Return top 10 results
-  const arr=new Array(10);
+  const resultArr=new Array(10);
   let ct=0;
-  let i
   const ch={};
    for(i=0;i<40 && ct<10;i++){
      if(ch[tt[dotprod[i][1]]]) continue;
      else ch[tt[dotprod[i][1]]]=1;
-     arr[ct]={
+     resultArr[ct]={
       title:tt[dotprod[i][1]],
       url:ads[dotprod[i][1]],
       statement:qs[i],
@@ -107,13 +105,12 @@ setTimeout(()=>{
     ct++;
   }
 
- // console.log(arr)
-  res.json(arr);
-  },2000)
- 
+ // console.log(resultArr)
+  res.json(resultArr);
 });
 
 //Assigning PORT to our application
 app.listen(PORT, ()=>{
-    console.log("Server is running on port"+PORT);
+    console.log("Server is running on port "+PORT);
+    console.log("http://localhost:"+PORT);
 });
